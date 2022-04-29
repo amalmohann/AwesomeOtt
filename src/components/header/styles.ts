@@ -17,11 +17,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#ffffff',
   },
-  icon: {
-    height: 20,
-    width: 20,
-    marginHorizontal: 10,
-  },
 });
 
 export default styles;
