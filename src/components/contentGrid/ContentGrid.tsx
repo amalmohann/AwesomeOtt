@@ -1,7 +1,7 @@
-import React, {memo} from 'react';
-import {Easing, Image, Text, View} from 'react-native';
+import React, { memo } from 'react';
+import { Easing, Image, Text, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import TextTicker from 'react-native-text-ticker';
-import {Content} from '../../models';
+import { Content } from '../../models';
 import styles from './styles';
 
 const previewImage: any = (imageSource: string) => {
@@ -32,25 +32,27 @@ const previewImage: any = (imageSource: string) => {
 const ContentGrid: React.FC<Content> = memo((props: Content) => {
   return (
     <View style={styles.content}>
-      <View style={styles.contentImageContainer}>
-        <Image
-          style={styles.contentImage}
-          source={previewImage(props['poster-image']!)}
-        />
-      </View>
-      <View style={styles.contentTextContainer}>
-      <TextTicker
-          bounce={true}
-          duration={props.name.length * 200}
-          scrollSpeed={20}
-          style={styles.contentTitle}
-          loop
-          repeatSpacer={50}
-          // easing={Easing.ease}
-          marqueeDelay={2000}
-        >
-        {props.name}</TextTicker>
-      </View>
+      <TouchableOpacity onLongPress={() => ToastAndroid.show(props.name, ToastAndroid.LONG)}>
+        <View style={styles.contentImageContainer}>
+          <Image
+            style={styles.contentImage}
+            source={previewImage(props['poster-image']!)}
+          />
+        </View>
+        <View style={styles.contentTextContainer}>
+          <TextTicker
+            bounce={true}
+            duration={props.name.length * 200}
+            scrollSpeed={20}
+            style={styles.contentTitle}
+            loop
+            repeatSpacer={50}
+            // easing={Easing.ease}
+            marqueeDelay={2000}
+          >
+            {props.name}</TextTicker>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 });

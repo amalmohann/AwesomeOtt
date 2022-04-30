@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Text, View} from 'react-native';
 import styles from './styles';
 
@@ -10,13 +10,14 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = headerProps => {
+  const [searchBarToggle, setSearchBarToggle] = useState(false);
   return (
     <View style={styles.header}>
       <View style={styles.headerTitleContainer}>
-        <ImageIcon icon={backIcon} />
+        <ImageIcon icon={backIcon} tooltip={'Back'} />
         <Text style={styles.text}>{headerProps.title}</Text>
       </View>
-      <ImageIcon icon={SearchIcon} />
+      <ImageIcon icon={SearchIcon} tooltip={'Search'}/>
     </View>
   );
 };
