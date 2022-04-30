@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Image, Text, View} from 'react-native';
 import {Content} from '../../models';
 import styles from './styles';
@@ -28,7 +28,7 @@ const previewImage: any = (imageSource: string) => {
   }
 };
 
-const ContentGrid: React.FC<Content> = props => {
+const ContentGrid: React.FC<Content> = memo((props: Content) => {
   return (
     <View style={styles.content}>
       <View style={styles.contentImageContainer}>
@@ -40,6 +40,6 @@ const ContentGrid: React.FC<Content> = props => {
       <Text style={styles.contentTitle}>{props.name}</Text>
     </View>
   );
-};
+});
 
 export default ContentGrid;
