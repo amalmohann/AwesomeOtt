@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { windowWidth } from '../../res/constants';
 
 const styles = StyleSheet.create({
   statusBar: {
@@ -7,12 +8,14 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'black',
     height: '100%',
+    width: windowWidth,
     padding: 0,
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingHorizontal: 15,
+    justifyContent:'center',
+    alignItems:'center',
   },
 });
 

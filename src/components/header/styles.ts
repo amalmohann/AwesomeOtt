@@ -2,11 +2,12 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   header: {
-    height: 60,
+    height: 46.5,
+    paddingHorizontal:30,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    padding: 5,
+    marginBottom:18,
   },
   headerTitleContainer: {
     flexDirection: 'row',
