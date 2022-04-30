@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     color: '#ffffff',
   },
+  textInput:{
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    width:'60%'
+  },
 });
 
 export default styles;

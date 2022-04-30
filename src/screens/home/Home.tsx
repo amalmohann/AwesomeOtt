@@ -20,6 +20,13 @@ const Home: React.FC = () => {
     await retrieveData(page);
   };
 
+  const searchFilter = (text: string) => {
+    if(text){
+      console.log(text);
+      
+    }
+  }
+
   const retrieveData = async (pageOffset: number) => {
     PreviewContentService.getPreviews(pageOffset).then(
       (contentItems: ContentItems) => {
@@ -44,7 +51,7 @@ const Home: React.FC = () => {
   return (
     <View style={styles.body}>
       <StatusBar {...styles.statusBar} />
-      <Header title={AppbarTitle} />
+      <Header title={AppbarTitle} searchFilter={searchFilter}/>
       {previewContents.length > 0 ? (
         <View style={styles.container}>
           <FlatList
