@@ -1,4 +1,4 @@
-import { Content, ContentItems, ContentPreviewResponse } from '../models';
+import {Content, ContentItems, ContentPreviewResponse} from '../models';
 
 const previewContentData: Content[] = [] as Content[];
 
@@ -13,7 +13,9 @@ const fetchData: (page: number) => Promise<ContentPreviewResponse> = async (
     case 3:
       return await require('../res/json/CONTENTLISTINGPAGE-PAGE3.json');
     default:
-      return new Promise((resolve, reject) => { resolve({} as ContentPreviewResponse) });
+      return new Promise((resolve, reject) => {
+        resolve({} as ContentPreviewResponse);
+      });
   }
 };
 
@@ -24,16 +26,14 @@ const initialize: () => void = () => {
 
 const getPreviews: (page: number) => Promise<ContentItems> = (page: number) => {
   return new Promise<ContentItems>((resolve, reject) => {
-    fetchData(page).then(
-      (response: ContentPreviewResponse) => {
-        if (response.page) {
-          resolve(response.page!['content-items']);
-        }
-        else {
-          resolve({} as ContentItems);
-        }
-      });
-  })
+    fetchData(page).then((response: ContentPreviewResponse) => {
+      if (response.page) {
+        resolve(response.page!['content-items']);
+      } else {
+        resolve({} as ContentItems);
+      }
+    });
+  });
 };
 
 const PreviewContentService = {

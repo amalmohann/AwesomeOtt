@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: 'black',
     height: '100%',
-    padding: 3,
+    padding: 0,
   },
   container: {
     flex: 1,
