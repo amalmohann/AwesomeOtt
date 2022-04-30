@@ -7,7 +7,7 @@ import {Content, ContentItems} from '../../models';
 
 const Home: React.FC = () => {
   const [previewContents, setPreviewContents] = useState<Content[]>([]);
-  const [page, setPage] = useState<number>(3);
+  const [page, setPage] = useState<number>(1);
   const [endOfList, setEndOfList] = useState<boolean>(false);
 
   useEffect(() => {
