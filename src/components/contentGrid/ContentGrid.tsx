@@ -3,7 +3,7 @@ import {Image, Text, View} from 'react-native';
 import {Content} from '../../models';
 import styles from './styles';
 
-const previewImage = (imageSource: string) => {
+const previewImage: any = (imageSource: string) => {
   switch (imageSource) {
     case 'poster1.jpg':
       return require('../../res/images/poster1.jpg');
