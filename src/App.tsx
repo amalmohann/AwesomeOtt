@@ -1,16 +1,28 @@
-import React from 'react';
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  View,
-} from 'react-native';
-import Content from './components/content/Content';
-import Header from './components/header/Header';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useState} from 'react';
+import {Image, ScrollView, StatusBar, StyleSheet, View} from 'react-native';
 
-const App = () => {
+import {ContentGrid, Header} from './components';
+
+// importing model
+import {ContentPreviewResponse} from './models';
+
+const App: React.FC = () => {
+  const [contents, setContents] = useState({});
+  useEffect(() => {
+    fetchData();
+    console.log('====================================');
+    console.log(contents);
+    console.log('====================================');
+  }, []);
+
+  const fetchData = async () => {
+    const data: ContentPreviewResponse = require('./res/json/CONTENTLISTINGPAGE-PAGE1.json');
+    await setContents(data.page['content-items']);
+  };
+
+  let poster: string = 'poster6.jpg';
+
   return (
     <View style={styles.body}>
       <StatusBar backgroundColor={'black'} />
@@ -19,134 +31,7 @@ const App = () => {
       <ScrollView
         contentContainerStyle={styles.container}
         fadingEdgeLength={100}>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
-        <View>
-          <Content title="Hello">
-            <Image
-              style={styles.contentImage}
-              source={require('./res/images/poster6.jpg')}
-            />
-          </Content>
-        </View>
+        <ContentGrid name="Hello" poster-image={poster} />
       </ScrollView>
     </View>
   );
@@ -165,11 +50,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-  },
-  contentImage: {
-    flex: 1,
-    height: 175,
-    width: 120,
   },
 });
 
