@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   iconImage: {
-    height: 20,
-    width: 20,
+    height: 16,
+    width: 16,
     marginHorizontal: 10,
   },
 });
