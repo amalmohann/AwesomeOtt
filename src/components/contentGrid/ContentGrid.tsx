@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
-import {Image, Text, View} from 'react-native';
+import {Easing, Image, Text, View} from 'react-native';
+import TextTicker from 'react-native-text-ticker';
 import {Content} from '../../models';
 import styles from './styles';
 
@@ -37,7 +38,19 @@ const ContentGrid: React.FC<Content> = memo((props: Content) => {
           source={previewImage(props['poster-image']!)}
         />
       </View>
-      <Text style={styles.contentTitle}>{props.name}</Text>
+      <View style={styles.contentTextContainer}>
+      <TextTicker
+          bounce={true}
+          duration={props.name.length * 200}
+          scrollSpeed={20}
+          style={styles.contentTitle}
+          loop
+          repeatSpacer={50}
+          // easing={Easing.ease}
+          marqueeDelay={2000}
+        >
+        {props.name}</TextTicker>
+      </View>
     </View>
   );
 });

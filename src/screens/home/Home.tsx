@@ -7,7 +7,8 @@ import {Content, ContentItems} from '../../models';
 
 const Home: React.FC = () => {
   const [previewContents, setPreviewContents] = useState<Content[]>([]);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(3);
+  const [endOfList, setEndOfList] = useState<boolean>(false);
 
   useEffect(() => {
     initComponent();
@@ -23,14 +24,20 @@ const Home: React.FC = () => {
       (contentItems: ContentItems) => {
         if (contentItems.content) {
           setPreviewContents([...previewContents, ...contentItems.content]);
-          console.log(contentItems.content);
+          setPage(page + 1);
+        } else {
+          setEndOfList(true);
         }
       },
     );
   };
 
-  const handleOnFlatListEnd = () => {
-    console.log('Triggered');
+  const handleOnFlatListEnd = async () => {
+    if (!endOfList) {
+      await retrieveData(page);
+    } else {
+      console.log('End of List');
+    }
   };
 
   return (
@@ -40,6 +47,9 @@ const Home: React.FC = () => {
       {previewContents.length > 0 ? (
         <View style={styles.container}>
           <FlatList
+            // ItemSeparatorComponent={()=><View style={{margin:1}}></View>}
+            // CellRendererComponent={()=><View style={{margin:1}}></View>}
+            // contentContainerStyle={styles.container}
             numColumns={3}
             fadingEdgeLength={100}
             data={previewContents}
@@ -51,7 +61,7 @@ const Home: React.FC = () => {
               />
             )}
             onEndReached={handleOnFlatListEnd}
-            onEndReachedThreshold={0.5}
+            onEndReachedThreshold={0.8}
           />
         </View>
       ) : (
