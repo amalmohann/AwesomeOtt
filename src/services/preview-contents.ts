@@ -1,4 +1,4 @@
-import {Content, ContentPreviewResponse} from '../models';
+import {Content, ContentItems, ContentPreviewResponse} from '../models';
 
 const previewContentData: Content[] = [] as Content[];
 
@@ -17,15 +17,15 @@ const fetchData: (page: number) => Promise<ContentPreviewResponse> = async (
   }
 };
 
-const initialize = () => {
+const initialize: () => void = () => {
   previewContentData.splice(0, previewContentData.length);
   console.log('Initialization completed!');
 };
 
-const getPreviews = async (page: number) => {
-  fetchData(page).then((value: ContentPreviewResponse) => {
-    return value ? value.page['content-items'] : null;
-  });
+const getPreviews: (page: number) => Promise<ContentItems> = (page: number) => {
+  return fetchData(page).then(
+    (response: ContentPreviewResponse) => response!.page!['content-items']!,
+  );
 };
 
 const PreviewContentService = {

@@ -1,38 +1,53 @@
-import React, {useEffect} from 'react';
-import {View, StatusBar, ScrollView} from 'react-native';
-import {ContentGrid, Header} from '../../components';
-// import {ContentPreviewResponse} from '../../models';
+import React, { useEffect, useState } from 'react';
+import { View, StatusBar, ScrollView, ActivityIndicator, FlatList } from 'react-native';
+import { ContentGrid, Header } from '../../components';
 import styles from './styles';
-import {PreviewContentService} from '../../services';
-
-// const data: ContentPreviewResponse = require('./res/json/CONTENTLISTINGPAGE-PAGE1.json');
-
-const initComponent = async () => {
-  await PreviewContentService.initialize();
-  retrieveData(3);
-};
-
-const retrieveData = async (page: number) => {
-  await PreviewContentService.getPreviews(page);
-};
+import { PreviewContentService } from '../../services';
+import { Content, ContentItems } from '../../models';
 
 const Home: React.FC = () => {
-  useEffect(() => {
-    initComponent();
-  }, []);
+    const [previewContents, setPreviewContents] = useState<Content[]>([]);
 
-  return (
-    <View style={styles.body}>
-      <StatusBar backgroundColor={'black'} />
-      <Header title="Romance" />
-      {/* <FlatList data={data?['content-items']?.content}/> */}
-      <ScrollView
-        contentContainerStyle={styles.container}
-        fadingEdgeLength={100}>
-        <ContentGrid name="Hello" poster-image={'poster1.jpg'} />
-      </ScrollView>
-    </View>
-  );
+    useEffect(() => {
+        initComponent();
+    }, []);
+
+    const initComponent = async () => {
+        await PreviewContentService.initialize();
+        await retrieveData(1);
+    };
+
+    const retrieveData = async (page: number) => {
+        PreviewContentService.getPreviews(page).then(
+            (contentItems: ContentItems) => {
+                if (contentItems) {
+                    setPreviewContents([...previewContents, ...contentItems.content]);
+                    console.log(contentItems.content);
+                }
+            },
+        );
+    };
+
+    return (
+        <View style={styles.body}>
+            <StatusBar backgroundColor={'black'} />
+            <Header title="Romance" />
+            {(previewContents.length > 0) ? (
+                <View style={styles.container}>
+                    <FlatList
+                        numColumns={3}
+                        fadingEdgeLength={100}
+                        data={previewContents}
+                        keyExtractor={(item, index) => 'key' + index}
+                        renderItem={({ item }) => <ContentGrid name={item.name} poster-image={item['poster-image']} />} />
+                </View>
+            ) : (
+                <View style={styles.container}>
+                    <ActivityIndicator />
+                </View>
+            )}
+        </View>
+    );
 };
 
 export default Home;
