@@ -6,6 +6,7 @@ import {PreviewContentService} from '../../services';
 import {Content, ContentItems} from '../../models';
 
 const Home: React.FC = () => {
+  const AppbarTitle = "Romantic Comedy";
   const [previewContents, setPreviewContents] = useState<Content[]>([]);
   const [page, setPage] = useState<number>(1);
   const [endOfList, setEndOfList] = useState<boolean>(false);
@@ -43,13 +44,12 @@ const Home: React.FC = () => {
   return (
     <View style={styles.body}>
       <StatusBar {...styles.statusBar} />
-      <Header title="Romance" />
+      <Header title={AppbarTitle} />
       {previewContents.length > 0 ? (
         <View style={styles.container}>
           <FlatList
-            // ItemSeparatorComponent={()=><View style={{margin:1}}></View>}
-            // CellRendererComponent={()=><View style={{margin:1}}></View>}
-            // contentContainerStyle={styles.container}
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
             numColumns={3}
             fadingEdgeLength={100}
             data={previewContents}
