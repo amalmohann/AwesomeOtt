@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import {Image, ImageSourcePropType, TouchableOpacity} from 'react-native';
+import { Image, ImageSourcePropType, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 interface ImageIconProps {
@@ -7,14 +8,13 @@ interface ImageIconProps {
   icon: ImageSourcePropType;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ImageIcon: React.FC<ImageIconProps> = ({tooltip, icon}) => {
+const ImageIcon: React.FC<ImageIconProps> = (imageIconProps) => {
   return (
     <TouchableOpacity
       onPress={() => {
         console.log('hello');
       }}>
-      <Image style={styles.iconImage} source={icon} />
+      <Image style={styles.iconImage} source={imageIconProps.icon} />
     </TouchableOpacity>
   );
 };

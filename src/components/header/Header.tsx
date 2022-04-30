@@ -9,12 +9,12 @@ interface HeaderProps {
   title: string;
 }
 
-const Header: React.FC<HeaderProps> = ({title}) => {
+const Header: React.FC<HeaderProps> = headerProps => {
   return (
     <View style={styles.header}>
       <View style={styles.headerTitleContainer}>
         <ImageIcon icon={backIcon} />
-        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>{headerProps.title}</Text>
       </View>
       <ImageIcon icon={SearchIcon} />
     </View>

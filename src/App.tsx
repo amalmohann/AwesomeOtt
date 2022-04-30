@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
-import {Image, ScrollView, StatusBar, StyleSheet, View} from 'react-native';
+import {ScrollView, StatusBar, StyleSheet, View} from 'react-native';
 
 import {ContentGrid, Header} from './components';
 
