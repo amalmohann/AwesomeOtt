@@ -12,6 +12,7 @@ interface ImageIconProps {
 const ImageIcon: React.FC<ImageIconProps> = (imageIconProps) => {
   return (
     <TouchableOpacity
+      style={styles.container}
       onLongPress={() => imageIconProps.tooltip ? ToastAndroid.show(imageIconProps.tooltip, ToastAndroid.LONG) : null}
       onPress={() => {
         imageIconProps.pressAction();

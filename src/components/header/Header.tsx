@@ -20,8 +20,10 @@ const Header: React.FC<HeaderProps> = headerProps => {
   };
 
   const handleBackPress = () => {
-    Keyboard.dismiss();
-    setSearchBarToggle(false);
+    if (searchBarToggle) {
+      Keyboard.dismiss();
+      setSearchBarToggle(false);
+    }
   };
 
   const handleSearch = () => {
