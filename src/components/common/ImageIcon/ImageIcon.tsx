@@ -6,6 +6,7 @@ import styles from './styles';
 interface ImageIconProps {
   tooltip?: string;
   icon: ImageSourcePropType;
+  pressAction: () => void;
 }
 
 const ImageIcon: React.FC<ImageIconProps> = (imageIconProps) => {
@@ -13,7 +14,7 @@ const ImageIcon: React.FC<ImageIconProps> = (imageIconProps) => {
     <TouchableOpacity
       onLongPress={() => imageIconProps.tooltip ? ToastAndroid.show(imageIconProps.tooltip, ToastAndroid.LONG) : null}
       onPress={() => {
-        console.log('hello');
+        imageIconProps.pressAction();
       }}>
       <Image style={styles.iconImage} source={imageIconProps.icon} />
     </TouchableOpacity>

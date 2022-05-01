@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   header: {
-    height: 40,
+    height: 50,
     paddingHorizontal: 5,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
   textInput: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 20,
     color: '#ffffff',
     width: '60%',
+    alignItems: 'center',
   },
 });
 
