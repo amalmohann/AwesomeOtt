@@ -22,6 +22,8 @@ const Header: React.FC<HeaderProps> = headerProps => {
   const handleBackPress = () => {
     if (searchBarToggle) {
       Keyboard.dismiss();
+      setSearchKey('');
+      headerProps.searchFilter('');
       setSearchBarToggle(false);
     }
   };
