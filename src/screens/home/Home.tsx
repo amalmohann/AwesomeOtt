@@ -25,7 +25,7 @@ const Home: React.FC = () => {
   const searchFilter = (searchText: string) => {
     if (searchText) {
       const searchFilterContent = previewContents.filter((content: Content) =>
-        content.name.includes(searchText),
+        content.name.toLowerCase().includes(searchText.toLowerCase()),
       );
       setFilteredContents(searchFilterContent);
     } else {
