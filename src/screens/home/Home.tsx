@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {View, StatusBar, ActivityIndicator, FlatList} from 'react-native';
 import {ContentGrid, Header} from '../../components';
@@ -6,8 +7,9 @@ import {PreviewContentService} from '../../services';
 import {Content, ContentItems} from '../../models';
 
 const Home: React.FC = () => {
-  const AppbarTitle = "Romantic Comedy";
+  const AppbarTitle = 'Romantic Comedy';
   const [previewContents, setPreviewContents] = useState<Content[]>([]);
+  const [filteredContents, setFilteredContents] = useState<Content[]>([]);
   const [page, setPage] = useState<number>(1);
   const [endOfList, setEndOfList] = useState<boolean>(false);
 
@@ -20,18 +22,23 @@ const Home: React.FC = () => {
     await retrieveData(page);
   };
 
-  const searchFilter = (text: string) => {
-    if(text){
-      console.log(text);
-      
+  const searchFilter = (searchText: string) => {
+    if (searchText) {
+      const searchFilterContent = previewContents.filter((content: Content) =>
+        content.name.includes(searchText),
+      );
+      setFilteredContents(searchFilterContent);
+    } else {
+      setFilteredContents(previewContents);
     }
-  }
+  };
 
   const retrieveData = async (pageOffset: number) => {
     PreviewContentService.getPreviews(pageOffset).then(
       (contentItems: ContentItems) => {
         if (contentItems.content) {
           setPreviewContents([...previewContents, ...contentItems.content]);
+          setFilteredContents([...previewContents, ...contentItems.content]);
           setPage(page + 1);
         } else {
           setEndOfList(true);
@@ -51,7 +58,7 @@ const Home: React.FC = () => {
   return (
     <View style={styles.body}>
       <StatusBar {...styles.statusBar} />
-      <Header title={AppbarTitle} searchFilter={searchFilter}/>
+      <Header title={AppbarTitle} searchFilter={searchFilter} />
       {previewContents.length > 0 ? (
         <View style={styles.container}>
           <FlatList
@@ -59,7 +66,7 @@ const Home: React.FC = () => {
             showsHorizontalScrollIndicator={false}
             numColumns={3}
             fadingEdgeLength={100}
-            data={previewContents}
+            data={filteredContents}
             keyExtractor={(item, index) => 'key' + index}
             renderItem={({item}) => (
               <ContentGrid
