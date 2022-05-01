@@ -3,11 +3,11 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   header: {
     height: 40,
-    paddingHorizontal:5,
+    paddingHorizontal: 5,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginBottom:8,
+    marginBottom: 8,
   },
   headerTitleContainer: {
     flexDirection: 'row',
@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     color: '#ffffff',
   },
-  textInput:{
+  textInput: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#ffffff',
-    width:'60%'
+    width: '60%',
   },
 });
 
